@@ -108,7 +108,7 @@ public class ContainerParameters {
     this.jvmFlags.set(jvmFlags);
   }
 
-    @Input
+  @Input
   @Optional
   public MapProperty<String, String> getEnvironment() {
     String envProperty = System.getProperty(PropertyNames.CONTAINER_ENVIRONMENT);
