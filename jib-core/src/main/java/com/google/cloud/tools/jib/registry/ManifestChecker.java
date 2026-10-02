@@ -43,13 +43,14 @@ class ManifestChecker<T extends ManifestTemplate>
       return Optional.empty();
     }
 
-    // Find a MANIFEST_UNKNOWN error response code.
+    // Find a MANIFEST_UNKNOWN or NAME_UNKNOWN error response code. NAME_UNKNOWN means the
+    // repository itself does not exist yet, so the manifest cannot exist either.
     ErrorCodes errorCode = ErrorResponseUtil.getErrorCode(responseException);
-    if (errorCode == ErrorCodes.MANIFEST_UNKNOWN) {
+    if (errorCode == ErrorCodes.MANIFEST_UNKNOWN || errorCode == ErrorCodes.NAME_UNKNOWN) {
       return Optional.empty();
     }
 
-    // MANIFEST_UNKNOWN was not found as a error response code.
+    // Neither MANIFEST_UNKNOWN nor NAME_UNKNOWN was found as an error response code.
     throw responseException;
   }
 
